@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+
+    <div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ user.profile.profile_path.url }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ user.username }}</h2>
+          <p class="text-secondary">{{ user.email }}</p>
+          <p class="text-secondary">{{ user.profile.community.name }}</p>
+
+        </div>
+      </div>
+      <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <fieldset class="form-group">
+              <legend class="border-bottom mb-4">Profile Info</legend>
+              {{ u_form|crispy }}
+              {{ p_form|crispy }}
+          </fieldset>
+          <div class="form-group">
+              <button class="btn btn-outline-info" type="submit">Update</button>
+          </div>
+      </form>
+    </div>
+    <style>
+    
+.content-section {
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.article-title {
+  color: #444444;
+}
+
+a.article-title:hover {
+  color: #428bca;
+  text-decoration: none;
+}
+
+.article-content {
+  white-space: pre-line;
+}
+
+.article-img {
+  height: 65px;
+  width: 65px;
+  margin-right: 16px;
+}
+
+.article-metadata {
+  padding-bottom: 1px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #e3e3e3
+}
+
+.article-metadata a:hover {
+  color: #333;
+  text-decoration: none;
+}
+
+.article-svg {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+.getinput>input{
+  width: 100%;
+  border: none;
+  border-top: solid 1px #bbb;
+  padding-top: 10px;
+}
+.getinput>input:focus {
+  outline-width: 0;
+}
+.account-heading {
+  font-size: 2.5rem;
+}
+.image_outer_container{
+  margin-top: auto;
+  margin-bottom: auto;
+  border-radius: 50%;
+  position: relative;
+}
+
+.image_inner_container{
+  border-radius: 50%;
+  padding: 5px;
+ background: #833ab4; 
+ background: -webkit-linear-gradient(to bottom, #fcb045, #fd1d1d, #833ab4); 
+ background: linear-gradient(to bottom, #fcb045, #fd1d1d, #833ab4);
+}
+.image_inner_container img{
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  border: 5px solid white;
+}
+
+.image_outer_container .green_icon{
+  background-color: #4cd137;
+  position: absolute;
+  right: 30px;
+  bottom: 10px;
+  height: 30px;
+  width: 30px;
+  border:5px solid white;
+  border-radius: 50%;
+}
+
+    </style>
+{% endblock content %}

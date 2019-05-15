@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% load static %}
+{% block content %}
+{{ block.super }}
+{% load carton_tags %}
+{% get_cart as cart %}
+
+<style>
+    .ctitle {
+        font-family: 'Josefin Sans', sans-serif;
+    }
+
+    * {
+        /* font-family: 'Pacifico', cursive; */
+        font-family: 'Josefin Sans', sans-serif;
+    }
+
+    .product-grid {
+        border-radius: 10px;
+
+    }
+
+
+
+    .fresh {
+        background-color: #27AE60;
+        color: white
+    }
+
+    .menu {
+        background-color: #EAEDED;
+        color: #333
+    }
+
+    .menu:hover {
+        color: #27AE60
+    }
+</style>
+
+<div class="container">
+
+    <h3 style="background-color:#27AE60;color: white ; " class="h3 list-group-item list-group-item-action">
+        User preference <i class="fab fa-gulp"></i>
+    </h3>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-3">
+            <div class="list-group">
+                <span style="background-color:#27AE60;color:white" href="#" class="text-center list-group-item">
+                    <i class="fab fa-buromobelexperte"></i> Menu
+                </span>
+                <a href="{% url 'cart' %}" class="list-group-item menu">
+                    <i class="fas fa-shopping-cart"></i> Cart
+                    <span class="badge badge-primary badge-pill fresh">
+                        {% if cart.items %} {{ cart.items |length }} {% else %} 0 {% endif %}
+                    </span>
+                </a>
+                <a href="{% url 'order_history' %}" class="list-group-item menu">
+                    <i class="fas fa-edit"></i> fridge Orders
+                </a>
+                <a href="{% url 'stock' %}" class="list-group-item menu">
+                    <i class="fas fa-shopping-basket"></i> smart Grocery
+                </a>
+                <a href="{% url 'home' %}" class="list-group-item menu">
+                    <i class="fab fa-studiovinari"></i> my Fridge
+                </a>
+                <a href="#fruits" class="list-group-item menu">
+                    <i class="fab fa-apple"></i> Fruits
+                </a>
+                <a href="#vegetables" class="list-group-item menu">
+                    <i class="fas fa-seedling"></i> Vegetables
+                </a>
+                <a href="#beverages" class="list-group-item menu">
+                    <i class="fab fa-untappd"></i> Beverages
+                </a>
+                <a href="{% url 'settings' %}" class="list-group-item menu"> <i class="fa fa-cog" style="font-size:24px"></i>
+                    Settings
+                </a>
+            </div><!-- /list-group -->
+        </div>
+        {% for item in stock %}
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid">
+                <div class="product-image">
+                    <a href="#">
+                        <img class="pic-1" src="{{item.product.item_path.url}}">
+                        {% if item.product.item_path2 %}
+                        <img class="pic-2" src="{{item.product.item_path2.url}}">
+                        {% endif %}
+                    </a>
+                    <ul class="social">
+                        <li><a href="{% url 'limit' item.id %}" data-tip="Set Lowest Limit"><i class="fa fa-cog"></i></a></li>
+                    </ul>
+                    <span class="product-new-label fresh ">{{item.product.name}}</span>
+                </div>
+                </ul>
+                <div class="product-content">
+                    <h3 class="title"> {{item.product.name}} </h3>
+                    {% if settings %}
+                    limit : <b> 2 </b>
+                    {% else %}
+                    <span> set limit </span>
+                    {% endif %}
+                    <div class="price ctitle "> <br>
+                        <!-- <span> {{item.product.name}}  </span> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="modal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Modal body text goes here.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

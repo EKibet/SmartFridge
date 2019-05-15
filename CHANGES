@@ -1,0 +1,114 @@
+django-carton-1.2.1
+===================
+
+Date:  Febuary, 2016.
+
+* Fix Django 1.9 compatibility issues with the import module
+
+
+* * *
+
+
+django-carton-1.2.0
+===================
+
+Date:  June 19, 2014.
+
+* #12: Improve the way product model and queryset are handled
+
+
+* * *
+
+
+django-carton-1.1.3
+===================
+
+Date:  March 22, 2014.
+
+* #13: KeyError when adding item to cart.
+
+
+* * *
+
+
+django-carton-1.1.2
+-------------------
+
+Date:  February 13, 2014.
+
+* Fixed a but in template tags.
+
+
+* * *
+
+
+django-carton-1.1.1
+-------------------
+
+Date:  February 13, 2014.
+
+* Released with wrong version in setup.
+
+* * *
+
+
+django-carton-1.1.0
+-------------------
+
+Date:  February 12, 2014.
+
+* #10: Changed so only Cart state is saved to session, not the whole cart object
+* #9: Doesn't work with django 1.6 out of the box
+
+
+* * *
+
+
+django-carton-1.0.2
+-------------------
+
+Date: January 9, 2014.
+
+
+* #8: Ability to check if cart is empty
+* #7: Ability to serialize cart content
+
+
+* * *
+
+
+django-carton-1.0.1
+-------------------
+
+Date: November 7, 2013.
+
+* #6: Django 1.6 compatibility - the `urls` module path have changed 
+* #5: Support for products that use a custom primary key 
+* #4: Add the ability to count cart items
+
+
+* * *
+
+
+django-carton-1.0.0
+-------------------
+
+Date: August 15, 2013.
+
+* Updated multiple cart support in documentation (#2)
+* Improved stale items handling (#1)
+* Other minor documentation updates
+
+
+* * *
+
+
+django-carton-0.1.0
+-------------------
+
+Date: April 17, 2013
+
+First release of django-carton.
+
+
+* * *

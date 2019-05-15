@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+{{ block.super }}
+{% load carton_tags %}
+{% get_cart as cart %}
+<style>
+    .ctitle {
+        font-family: 'Josefin Sans', sans-serif;
+    }
+
+    * {
+        /* font-family: 'Pacifico', cursive; */
+        font-family: 'Josefin Sans', sans-serif;
+    }
+
+    .product-grid {
+        border-radius: 10px;
+
+    }
+
+    ul.dropdown-cart {
+        min-width: 250px;
+    }
+
+    ul.dropdown-cart li .item {
+        display: block;
+        padding: 3px 10px;
+        margin: 3px 0;
+    }
+
+    ul.dropdown-cart li .item:hover {
+        background-color: #f3f3f3;
+    }
+
+    ul.dropdown-cart li .item:after {
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+    }
+
+    ul.dropdown-cart li .item-left {
+        float: left;
+    }
+
+    ul.dropdown-cart li .item-left img,
+    ul.dropdown-cart li .item-left span.item-info {
+        float: left;
+    }
+
+    ul.dropdown-cart li .item-left span.item-info {
+        margin-left: 10px;
+    }
+
+    ul.dropdown-cart li .item-left span.item-info span {
+        display: block;
+    }
+
+    ul.dropdown-cart li .item-right {
+        float: right;
+    }
+
+    ul.dropdown-cart li .item-right button {
+        margin-top: 14px;
+    }
+
+    .fresh {
+        background-color: #27AE60;
+        color: white
+    }
+
+    .menu {
+        background-color: #EAEDED;
+        color: #333
+    }
+
+    .menu:hover {
+        color: #27AE60
+    }
+</style>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<div class="container">
+    <h3 style="background-color:#27AE60;color: white" class="h3 list-group-item list-group-item-action">
+        <i class="far fa-file-alt"></i> Receipt
+    </h3>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-3">
+                <div class="list-group">
+                    <span style="background-color:#27AE60;color:white" href="#" class="text-center list-group-item">
+                        <i class="fab fa-buromobelexperte"></i> Menu
+                    </span>
+                    <a href="{% url 'cart' %}" class="list-group-item menu">
+                        <i class="fas fa-shopping-cart"></i> Cart
+                        <span class="badge badge-primary badge-pill fresh">
+                            {% if cart.items %} {{ cart.items |length }} {% else %} 0 {% endif %}
+                        </span>
+                    </a>
+                    <a href="{% url 'order_history' %}" class="list-group-item menu">
+                        <i class="fas fa-edit"></i> fridge Orders
+                    </a>
+                    <a href="{% url 'stock' %}" class="list-group-item menu">
+                        <i class="fas fa-shopping-basket"></i> smart Grocery
+                    </a>
+                    <a href="{% url 'home' %}" class="list-group-item menu">
+                        <i class="fab fa-studiovinari"></i> my Fridge
+                    </a>
+                    <a href="#fruits" class="list-group-item menu">
+                        <i class="fab fa-apple"></i> Fruits
+                    </a>
+                    <a href="#vegetables" class="list-group-item menu">
+                        <i class="fas fa-seedling"></i> Vegetables
+                    </a>
+                    <a href="#beverages" class="list-group-item menu">
+                        <i class="fab fa-untappd"></i> Beverages
+                    </a>
+                    <a href="{% url 'settings' %}" class="list-group-item menu"> <i class="fa fa-cog" style="font-size:24px"></i>
+                        Settings
+                    </a>
+
+                </div><!-- /list-group -->
+            </div><!-- /col -->
+            <div class="col-xs-12 col-sm-9">
+
+                <div class="row">
+                    {% for data in state %}
+                    <div class="col-xs-12 col-sm-4" id="vegetables">
+
+                        <div class="card" style="width: 18rem;">
+                            <img class="img-responsive" src="{{data.product.item_path2.url}}" alt="" width="286px;" height="200px;
+                                        ">
+                            <div class="card-body" style="">
+                                <h5 class="card-title text-center"> {{data.product.name}}(s) </h5>
+                                <p class="card-text text-center">
+                                    <i class="fas fa-info-circle"></i> in stock : <strong> {{ data.quantity }} </strong>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div><!-- /col -->
+                </div>
+
+            </div><!-- /container -->
+        </div>
+    </div>
+</div>
+
+{% endblock %}

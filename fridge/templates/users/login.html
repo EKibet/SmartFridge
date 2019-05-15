@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<html>
+  <head>
+
+     <link rel="stylesheet" href="/static/css/login.css">
+  
+
+  </head>
+  <body>
+    
+
+<section class="user-authentication">
+  <div class="user_options-container">
+    <div class="user_options-text">
+      <div class="user_options-unregistered">
+        <h2 class="user_unregistered-title">Don't have an account?</h2>
+        <p class="user_unregistered-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras quis nibh in leo lacinia blandit et quis lorem.</p>
+        <button class="user_unregistered-signup" id="signup-button">Sign up</button>
+      </div>
+
+      <div class="user_options-registered">
+        <h2 class="user_registered-title">Have an account?</h2>
+        <p class="user_registered-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras quis nibh in leo lacinia blandit et quis lorem.</p>
+        <button class="user_registered-login" id="login-button">Login</button>
+      </div>
+    </div>
+    
+    <div class="user_options-forms" id="user_options-forms">
+      <div class="user_forms-login">
+        <h2 class="forms_title">Login</h2>
+        <form class="forms_form"  method="post">
+          {% csrf_token %}
+          <fieldset class="forms_fieldset">
+            <div class="forms_field">
+              <input type="text" placeholder="Username" name="username" class="forms_field-input" required autofocus />
+            </div>
+            <div class="forms_field">
+              <input type="password" placeholder="Password" name="password" class="forms_field-input" required />
+            </div>
+          </fieldset>
+          <div class="forms_buttons">
+            <button type="button" class="forms_buttons-forgot" id="forget-button">Forgot password?</button>
+            <button type="submit" class="forms_buttons-action">Login</button>
+						<a class="forms_buttons-mb-button" id="signup-button-mb">Sign up</a>
+          </div>
+        </form>
+      </div>
+      <div class="user_forms-signup">
+        <h2 class="forms_title">Sign Up</h2>
+            <form class="forms_form" action="/signup" method="post">
+              {% csrf_token %}
+          <fieldset class="forms_fieldset">
+            <div class="forms_field">
+              <input type="text" name="username" placeholder="Full Name" class="forms_field-input" required />
+            </div>
+            <div class="forms_field">
+              <input type="email" placeholder="Email" name="email" class="forms_field-input" required />
+            </div>
+            <div class="forms_field">
+              <input type="password" placeholder="Password" name="password1" class="forms_field-input" required />
+            </div>
+            <div class="forms_field">
+              <input type="password" placeholder="Password" name="password2" class="forms_field-input" required />
+            </div>            
+          </fieldset>
+          <div class="forms_buttons">
+            <button type="submit" class="forms_buttons-action">Sign up</button>
+						<a class="forms_buttons-mb-button" id="login-button-mb">Login</a>
+          </div>
+        </form>
+      </div>
+			<div class="user_forms-forgot">
+        <h2 class="forms_title">Forgot Password</h2>
+        <form class="forms_form">
+          <fieldset class="forms_fieldset">
+            <div class="forms_field">
+              <input type="email" placeholder="Email" class="forms_field-input" required autofocus />
+            </div>
+          </fieldset>
+          <div class="forms_buttons">
+            <button type="submit" class="forms_buttons-action">Send reset link</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section> 
+<script src="{% static 'scripts_auth.js' %}"></script>
+
+  </body>
+</html>
+{% endblock %}

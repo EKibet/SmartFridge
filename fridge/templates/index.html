@@ -1,0 +1,61 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% load carton_tags %}
+{% get_cart as cart %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+<div class="container">
+    <h3 class="h3">Smart Grocery</h3>
+    <div class="row">
+        {% for item in stock %}
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid">
+                <div class="product-image">
+                    <a href="#">
+                        <img class="pic-1" src="{{item.item_path.url}}">
+                        {% if item.item_path2 %}
+                        <img class="pic-2" src="{{item.item_path2.url}}">
+                        {% endif %}
+                    </a>
+                    <ul class="social">
+                        <li><a href="{% url 'cart' %}" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
+                        <!-- <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li> -->
+                        <li><a href="{% url 'add_to_cart' item_id=item.id %}" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
+                    <span class="product-new-label">{{item.name}}</span>
+                    <span class="product-discount-label">-{{item.discount}}%</span>
+                </div>
+                <ul class="rating">
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star disable"></li>
+                </ul>
+                <div class="product-content">
+                    <h3 class="title"><a href="#">{{item.name}}</a></h3>
+                    <div class="price">${{item.selling_price}}
+                        <span>${{item.selling_price}}</span>
+                    </div>
+                    <a class="add-to-cart" href="{% url 'add_to_cart' item_id=item.id %}">+ Add To Cart</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+</div>
+<hr>
+<img src="static/images/fridge_screenshots/your_fridge.png" alt="">
+{% for item in cart.items %}
+    {{ item.product.name }}
+    {{ item.quantity }}
+    {{ item.price }}
+{% endfor %}
+{% endblock %}

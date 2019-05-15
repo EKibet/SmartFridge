@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% load static %}
+{% block content %}
+{{ block.super }}
+{% load carton_tags %}
+{% get_cart as cart %}
+<style>
+    .ctitle {
+        font-family: 'Josefin Sans', sans-serif;
+    }
+
+    * {
+        /* font-family: 'Pacifico', cursive; */
+        font-family: 'Josefin Sans', sans-serif;
+    }
+
+    .product-grid {
+        border-radius: 10px;
+
+    }
+
+
+    .fresh {
+        background-color: #27AE60;
+        color: white
+    }
+
+    .menu {
+        background-color: #EAEDED;
+        color: #333
+    }
+
+    .menu:hover {
+        color: #27AE60
+    }
+    </style>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<h3 style="background-color:#27AE60;color: white;font-family: 'Josefin Sans', sans-serif;" class="h3 list-group-item list-group-item-action">User
+    Minimal Limit</h3>
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group">
+                <span style="background-color:#EAEDED;color:#333" href="#" class="text-center list-group-item">
+                    <i class="fab fa-buromobelexperte"></i> Menu
+                </span>
+                <a href="{% url 'cart' %}" class="list-group-item menu">
+                    <i class="fas fa-shopping-cart"></i> Cart
+                    <span class="badge badge-primary badge-pill fresh">
+                        {% if cart.items %} {{ cart.items |length }} {% else %} 0 {% endif %}
+                    </span>
+                </a>
+                <a href="{% url 'order_history' %}" class="list-group-item menu">
+                    <i class="fas fa-edit"></i> fridge Orders
+                </a>
+                <a href="{% url 'stock' %}" class="list-group-item menu">
+                    <i class="fas fa-shopping-basket"></i> smart Grocery
+                </a>
+                <a href="{% url 'home' %}" class="list-group-item menu">
+                    <i class="fab fa-studiovinari"></i> my Fridge
+                </a>
+                <a href="#fruits" class="list-group-item menu">
+                    <i class="fab fa-apple"></i> Fruits
+                </a>
+                <a href="#vegetables" class="list-group-item menu">
+                    <i class="fas fa-seedling"></i> Vegetables
+                </a>
+                <a href="#beverages" class="list-group-item menu">
+                    <i class="fab fa-untappd"></i> Beverages
+                </a>
+                <a href="{% url 'settings' %}" class="list-group-item menu"> <i class="fa fa-cog" style="font-size:24px"></i>
+                    Settings
+                </a>
+            </div><!-- /list-group -->
+        </div><!-- /col -->
+        <div class="col-md-2"></div>
+        <div class="col-md-5" id="business">
+            <form action="{% url 'limit' stock_id=stock.id %}" method="POST" enctype="multipart/form-data">
+                <h4 class="text-center"> {{stock.product.name}}'s limit </h4>
+                {% csrf_token %}
+                {% bootstrap_form settingform %}
+                <input type="submit" class="btn btn-outline-success" value="Add limit">
+            </form>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,166 @@
+{% extends "users/base.html" %}
+{% load bootstrap4 %}
+{% block content %}
+      {% if form.errors %}
+        <p> Some Information Might be Incorrect </p>
+      {% endif %}
+      <div class="container">
+<div class="row">
+  <div class="col-md-4">
+
+
+  </div>
+  <div class="col-md-4 container__form">
+      <div class="container-fluid">
+    <form class="container__form" action="/signup" method="post">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+        <button type="submit" class="btn-custom"  value="Sign Up">Sign Up</button>
+
+      <input type="hidden" name="next" value="{{next}}">
+
+    </form>
+    <p class="container__terms">By signin up, you agree to our <br> <strong>Terms & Privacy Policy.</strong></p>
+
+
+  </div>
+  <div class="account">
+      <p>Have an account? <a href="{% url 'login' %}">Log in</a></p>
+    </div>
+ 
+  </div>
+
+  <div class="col-md-4">
+
+
+  </div>
+
+
+
+    <!-- empty div -->
+
+</div>
+</div>
+<style>
+body {
+background:linear-gradient(rgba(0,0,0,.8), rgba(0,0,0,.7)),url(https://images.unsplash.com/photo-1516156008625-3a9d6067fab5?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=47b4b88e2825332da6fb93898562051c&auto=format&fit=crop&w=500&q=60);
+font-family:'PT Sans',Helvetica, Arial, sans-serif;
+   background-repeat: no-repeat;
+   background-size:cover;
+   background-position: center;
+   height: 100%;
+}
+
+
+.btn-custom {
+    color: #fff;
+	background-color: #1fa67b;
+}
+.btn-custom:hover,
+.btn-custom:focus {
+    color: #fff;
+}
+.page-container {
+margin: 120px auto 0 auto;
+}
+
+/* h1 {
+	font-size: 30px;
+	font-weight: 700;
+	text-shadow:0 1px 4px rgba(0,0,0,.2);
+	text-align:center;
+} */
+
+.container__form form {
+position:relative;
+width:305px;
+margin-top: 80%;
+text-align:center;
+margin-left: 40%;
+
+}
+
+input {
+width:270px;
+height:42px;
+margin-top:25px;
+padding:0 15px;
+background:#2d2d2d;
+background:rgba(45,45,45,.15);
+-moz-border-radius: 6px;
+-webkit-border-radius:6px;
+text-align:center;
+border-radius:6px;
+border:1px solid #3d3d3d;
+border:1px solid rgba(255,255,255,.15);
+-moz-box-shadow:0 2px 3px 0 rgba(0,0,0,.1) inset;
+-webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+font-size:16px;
+color:#fff;
+text-shadow:0 1px 2px rgba(0,0,0,.1);
+-o-transition: all .2s;
+-moz-transition: all .2s;
+-webkit-transition: all .2s;
+-ms-transition: all .2s;
+}
+
+input:-moz-placeholder { color: #fff; }
+input:-ms-input-placeholder { color: #fff; }
+input::-webkit-input-placeholder { color: #fff; }
+
+input:focus {
+outline:none;
+-moz-box-shadow:
+        0 2px 3px 0 rgba(0,0,0,.1) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+-webkit-box-shadow:
+        0 2px 3px 0 rgba(0,0,0,.1) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+box-shadow:
+        0 2px 3px 0 rgba(0,0,0,.1) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+}
+
+
+
+.form-text{
+  display: none
+}
+label{
+  display: none;
+}
+.container__form input {
+    height: 36px;
+    width: 230px;
+    flex-grow: 1;
+    margin: 3px 0;
+    background-color: #FAFAFA;
+    box-shadow: none;
+    border: none;
+    border: 1px solid #EFEFEF;
+    border-radius: 3px;
+    padding: 3px 20px;
+    font-size: 14px;
+  }
+  .container__form button {
+    background-color: #3897f0;
+    padding: 5px 104px;
+    margin-top: 10px;
+    flex-grow: 1;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: none;
+    border: none;
+    border-radius: 3px;
+  }
+  .container__terms {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 0;
+}
+
+</style>
+{% endblock %}

@@ -1,0 +1,90 @@
+{% load static %} {% block content %}
+
+
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/supply.css' %}">
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+    <div class="row">
+
+        <section class="content">
+            <h1>{{x | upper}}</h1>
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+
+                        <div class="table-container">
+                            <table class="table table-filter">
+
+
+                                <tbody>
+                                    <th></th>
+                                    <th></th>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Date</th>
+
+                                    {% for item in selected %}
+
+                                    <tr data-status="pagado">
+                                        <td>
+                                            <div class="ckbox">
+                                                <input type="checkbox" id="checkbox1">
+                                                <label for="checkbox1"></label>
+                                            </div>
+                                        </td>
+                                        <td></td>
+
+                                        <td>
+                                            <div class="media">
+                                                <a href="#" class="pull-left">
+
+                                                </a>
+                                                <div class="media-body">
+                                                    <h4 class="title">
+                                                        <b> {{item}} </b>
+                                                        <span class="pull-right pagado">{{item.quantity}}</span>
+                                                    </h4>
+                                                    <p class="summary"></p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="media-body">
+                                                <span class="media-meta pull-right">{{item.supply_date}}</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <a type="button" href="#" class="btn btn-default">
+                                                <span class=""><strong>Total Cost: KES {{cart.total}}</strong></span>
+                                            </a></td>
+                                        <td>
+                                            <button type="button" class="btn btn-success">
+                                                <a href="#" style="color:beige;">
+                                                    Confirm <span class="glyphicon glyphicon-play"></span>
+                                                </a>
+                                            </button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+</div>
+{% endblock %}
